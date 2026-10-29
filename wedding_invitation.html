@@ -489,6 +489,16 @@
       margin-bottom: 12px;
     }
 
+    .scene-body-content {
+      width: 100%;
+      margin: auto 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-grow: 1;
+    }
+
     .couples-stack {
       width: 100%;
       display: flex;
@@ -1506,116 +1516,196 @@
       }
 
       /* =========================================================
-         SCENE 4: CEREMONY DETAILS MOBILE FIT
+         SCENE 4: CEREMONY DETAILS (BALANCED & CENTERED)
          ========================================================= */
       #scene-details {
-        padding: 24px 12px 8px 12px;
+        padding: 24px 12px 10px 12px;
+      }
+      #scene-details .scene-body-content {
+        margin: auto 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       .card-top-header {
-        font-size: 9.5px;
+        font-size: 10px;
         letter-spacing: 2px;
-        margin-bottom: 3px;
+        margin-bottom: 5px;
+        color: var(--burgundy-card);
       }
       .parents-section {
-        margin-bottom: 3px;
+        margin-bottom: 8px;
+        text-align: center;
       }
       .parents-names {
-        font-size: 13px;
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--burgundy-card);
+        font-family: 'Cinzel', serif;
       }
       .residence-line {
-        font-size: 10px;
+        font-size: 10.5px;
+        color: var(--ink-muted);
+        margin-top: 2px;
       }
       .invite-text {
-        font-size: 10.5px;
-        margin-bottom: 4px;
+        font-size: 12.5px;
+        margin: 6px auto 12px auto;
+        line-height: 1.4;
+        max-width: 320px;
+        text-align: center;
       }
       .couples-detail-grid {
-        gap: 5px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
         width: 100%;
+        margin: 4px 0 12px 0;
       }
       .couple-detail-box {
-        padding: 5px 6px;
+        padding: 12px 6px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.85);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+        border: 1.5px solid rgba(212, 175, 55, 0.45);
+        text-align: center;
       }
       .c-union-tag {
-        font-size: 8px;
-        margin-bottom: 1px;
+        font-size: 7.5px;
+        letter-spacing: 1.5px;
+        margin-bottom: 2px;
       }
       .c-bride {
-        font-size: 16px;
-        line-height: 1.05;
+        font-size: 22px;
+        line-height: 1.1;
+        color: var(--burgundy-card);
       }
       .c-with {
-        font-size: 9px;
+        font-size: 10px;
+        font-style: italic;
       }
       .c-groom {
-        font-size: 11px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin: 1px 0;
       }
       .c-parentage {
         font-size: 9px;
-        line-height: 1.15;
+        line-height: 1.2;
+        color: var(--ink-muted);
+        margin-top: 2px;
       }
       .quran-blessing {
-        font-size: 10px;
-        line-height: 1.25;
-        margin: 3px 0;
-        padding: 3px 6px;
+        font-size: 11px;
+        line-height: 1.35;
+        margin: 8px auto 4px auto;
+        padding: 6px 12px;
+        text-align: center;
+        border-top: 1px solid rgba(212, 175, 55, 0.35);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+        max-width: 320px;
       }
 
       /* =========================================================
-         SCENE 5: SCHEDULE & COUNTDOWN MOBILE FIT
+         SCENE 5: SCHEDULE & COUNTDOWN (BALANCED & CENTERED)
          ========================================================= */
       #scene-schedule {
-        padding: 24px 12px 8px 12px;
+        padding: 24px 12px 10px 12px;
+      }
+      #scene-schedule .scene-body-content {
+        margin: auto 0;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
       .insha-allah-header {
-        font-size: 14px;
-        margin-bottom: 1px;
+        font-size: 20px;
+        margin-bottom: 2px;
+        color: var(--gold-dark);
       }
       .insha-allah-sub {
-        font-size: 11px;
-        margin-bottom: 4px;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+        color: var(--burgundy-card);
       }
       .event-info-cards {
-        gap: 4px;
-        margin-bottom: 5px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
+        width: 100%;
+        margin-bottom: 12px;
       }
       .info-card {
-        padding: 5px 3px;
+        padding: 12px 4px;
+        border-radius: 10px;
+        background: #480C17;
+        color: #fff;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
       }
       .info-card .icon {
-        font-size: 12px;
+        font-size: 16px;
+        margin-bottom: 2px;
       }
       .info-card .label {
         font-size: 7.5px;
+        letter-spacing: 1px;
+        color: var(--gold-light);
       }
       .info-card .main-val {
-        font-size: 14px;
+        font-size: 13px;
+        margin: 2px 0;
+        font-weight: 700;
+        color: #fff;
       }
       .info-card .sub-val {
         font-size: 7.5px;
-        line-height: 1.1;
+        line-height: 1.15;
+        color: #E2D3D5;
       }
       .countdown-wrap {
-        padding: 4px 6px;
-        margin: 3px 0;
+        width: 100%;
+        background: rgba(72, 12, 23, 0.05);
+        border: 1.5px solid rgba(212, 175, 55, 0.38);
+        border-radius: 12px;
+        padding: 10px 8px;
+        margin-bottom: 12px;
+        text-align: center;
       }
       .countdown-label {
         font-size: 8.5px;
-        margin-bottom: 2px;
+        letter-spacing: 1.5px;
+        margin-bottom: 3px;
+        color: var(--gold-dark);
+        font-weight: 600;
       }
       .timer-units {
-        gap: 6px;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
       }
       .timer-unit .num {
-        font-size: 14px;
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--burgundy-card);
       }
       .timer-unit .unit {
-        font-size: 7.5px;
+        font-size: 8px;
+        color: var(--ink-muted);
       }
       .compliments-note {
-        font-size: 9.5px;
-        margin-top: 3px;
-        line-height: 1.2;
+        font-size: 10.5px;
+        line-height: 1.35;
+        margin-top: 4px;
+        text-align: center;
+        color: var(--ink-muted);
       }
 
       /* =========================================================
@@ -1787,38 +1877,40 @@
          (Host Parents & Twin Marriages)
          ========================================================= -->
     <div id="scene-details" class="invitation-card">
-      <div class="card-top-header">WITH GRATEFUL HEART & GREAT HAPPINESS</div>
+      <div class="scene-body-content">
+        <div class="card-top-header">WITH GRATEFUL HEART & GREAT HAPPINESS</div>
 
-      <div class="parents-section">
-        <div class="parents-names">Mr. Abdul Rahman & Mrs. Zeenath Rahman</div>
-        <div class="residence-line">Puthukkudy, P.O. Vakayad, Naduvannur • Ph: 7034490662</div>
-      </div>
-
-      <p class="invite-text">
-        We cordially invite you with family to share the happiness of the Wedding ceremony of our children:
-      </p>
-
-      <div class="couples-detail-grid">
-        <div class="couple-detail-box">
-          <div class="c-union-tag">THE FIRST UNION</div>
-          <div class="c-bride">Salmabee</div>
-          <div class="c-with">with</div>
-          <div class="c-groom">MUHAMMED AJNAS</div>
-          <div class="c-parentage">S/o. Abdul Rahiman & Fousiya<br>Mundakutty, Pathirikkara</div>
+        <div class="parents-section">
+          <div class="parents-names">Mr. Abdul Rahman & Mrs. Zeenath Rahman</div>
+          <div class="residence-line">Puthukkudy, P.O. Vakayad, Naduvannur • Ph: 7034490662</div>
         </div>
 
-        <div class="couple-detail-box">
-          <div class="c-union-tag">THE SECOND UNION</div>
-          <div class="c-bride">Rahmabee</div>
-          <div class="c-with">with</div>
-          <div class="c-groom">SHAHBAZ MUHAMMED</div>
-          <div class="c-parentage">S/o. Muhammed & Shabana<br>Kunnathkandi, Kadiyangad</div>
-        </div>
-      </div>
+        <p class="invite-text">
+          We cordially invite you with family to share the happiness of the Wedding ceremony of our children:
+        </p>
 
-      <div class="quran-blessing">
-        “And He placed between you affection and mercy.”
-        <div style="font-size: 11px; font-style: normal; letter-spacing: 1px; color: var(--burgundy-card); margin-top: 3px;">— SURAH AR-RUM 30:21 —</div>
+        <div class="couples-detail-grid">
+          <div class="couple-detail-box">
+            <div class="c-union-tag">THE FIRST UNION</div>
+            <div class="c-bride">Salmabee</div>
+            <div class="c-with">with</div>
+            <div class="c-groom">MUHAMMED AJNAS</div>
+            <div class="c-parentage">S/o. Abdul Rahiman & Fousiya<br>Mundakutty, Pathirikkara</div>
+          </div>
+
+          <div class="couple-detail-box">
+            <div class="c-union-tag">THE SECOND UNION</div>
+            <div class="c-bride">Rahmabee</div>
+            <div class="c-with">with</div>
+            <div class="c-groom">SHAHBAZ MUHAMMED</div>
+            <div class="c-parentage">S/o. Muhammed & Shabana<br>Kunnathkandi, Kadiyangad</div>
+          </div>
+        </div>
+
+        <div class="quran-blessing">
+          “And He placed between you affection and mercy.”
+          <div style="font-size: 11px; font-style: normal; letter-spacing: 1px; color: var(--burgundy-card); margin-top: 3px;">— SURAH AR-RUM 30:21 —</div>
+        </div>
       </div>
 
       <div class="card-nav-row" style="margin-top: auto;">
@@ -1832,47 +1924,49 @@
          (Date, Residence, Time, Live Countdown & Calendar)
          ========================================================= -->
     <div id="scene-schedule" class="invitation-card">
-      <div class="insha-allah-header">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
-      <div class="insha-allah-sub">In Sha Allah</div>
+      <div class="scene-body-content">
+        <div class="insha-allah-header">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+        <div class="insha-allah-sub">In Sha Allah</div>
 
-      <!-- 3 Key Event Highlights Matching Physical Invitation -->
-      <div class="event-info-cards">
-        <div class="info-card">
-          <div class="icon">📅</div>
-          <div class="label">SATURDAY</div>
-          <div class="main-val">07</div>
-          <div class="sub-val">NOVEMBER<br>2026</div>
+        <!-- 3 Key Event Highlights Matching Physical Invitation -->
+        <div class="event-info-cards">
+          <div class="info-card">
+            <div class="icon">📅</div>
+            <div class="label">SATURDAY</div>
+            <div class="main-val">07</div>
+            <div class="sub-val">NOVEMBER<br>2026</div>
+          </div>
+
+          <div class="info-card">
+            <div class="icon">📍</div>
+            <div class="label">VENUE</div>
+            <div class="main-val" style="font-size: 10px; line-height: 1.2;">AT OUR<br>RESIDENCE</div>
+            <div class="sub-val">Vakayad<br>Naduvannur</div>
+          </div>
+
+          <div class="info-card">
+            <div class="icon">⏰</div>
+            <div class="label">TIME</div>
+            <div class="main-val" style="font-size: 11px; line-height: 1.2;">BETWEEN<br>5 - 9 PM</div>
+            <div class="sub-val">EVENING<br>CEREMONY</div>
+          </div>
         </div>
 
-        <div class="info-card">
-          <div class="icon">📍</div>
-          <div class="label">VENUE</div>
-          <div class="main-val" style="font-size: 10px; line-height: 1.2;">AT OUR<br>RESIDENCE</div>
-          <div class="sub-val">Vakayad<br>Naduvannur</div>
+        <!-- Live Countdown -->
+        <div class="countdown-wrap">
+          <div class="countdown-label">✦ Countdown to the Auspicious Day ✦</div>
+          <div class="timer-units">
+            <div class="timer-unit"><span class="num" id="t-days">00</span><span class="unit">Days</span></div>
+            <div class="timer-unit"><span class="num" id="t-hours">00</span><span class="unit">Hours</span></div>
+            <div class="timer-unit"><span class="num" id="t-mins">00</span><span class="unit">Mins</span></div>
+            <div class="timer-unit"><span class="num" id="t-secs">00</span><span class="unit">Secs</span></div>
+          </div>
         </div>
 
-        <div class="info-card">
-          <div class="icon">⏰</div>
-          <div class="label">TIME</div>
-          <div class="main-val" style="font-size: 11px; line-height: 1.2;">BETWEEN<br>5 - 9 PM</div>
-          <div class="sub-val">EVENING<br>CEREMONY</div>
+        <div class="compliments-note">
+          With best compliments from:<br>
+          <strong>Shajeem, Anzeela Shajeem, Rizwan, Haizam & Ayana</strong>
         </div>
-      </div>
-
-      <!-- Live Countdown -->
-      <div class="countdown-wrap">
-        <div class="countdown-label">✦ Countdown to the Auspicious Day ✦</div>
-        <div class="timer-units">
-          <div class="timer-unit"><span class="num" id="t-days">00</span><span class="unit">Days</span></div>
-          <div class="timer-unit"><span class="num" id="t-hours">00</span><span class="unit">Hours</span></div>
-          <div class="timer-unit"><span class="num" id="t-mins">00</span><span class="unit">Mins</span></div>
-          <div class="timer-unit"><span class="num" id="t-secs">00</span><span class="unit">Secs</span></div>
-        </div>
-      </div>
-
-      <div class="compliments-note">
-        With best compliments from:<br>
-        <strong>Shajeem, Anzeela Shajeem, Rizwan, Haizam & Ayana</strong>
       </div>
 
       <div class="card-nav-row" style="margin-top: auto;">
