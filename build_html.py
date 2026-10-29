@@ -1663,15 +1663,15 @@ html_content = f'''<!DOCTYPE html>
   <!-- Floating Particles Canvas -->
   <canvas id="particlesCanvas"></canvas>
 
-  <!-- Discreet Corner Controls -->
+    <!-- Discreet Corner Controls (Default Active Music) -->
   <div class="corner-controls">
-    <button id="audioBtn" class="icon-btn" title="Bi Saraha by Abeer Nehme - Background Music">
-      <span id="audioIcon">🎵</span>
+    <button id="audioBtn" class="icon-btn music-active" title="Background Music: Bi Saraha by Abeer Nehme (Playing)">
+      <span id="audioIcon">\U0001f50a</span>
     </button>
   </div>
 
-  <!-- Background Music Audio: Bi Saraha (Abeer Nehme) -->
-  <audio id="bgMusic" loop preload="auto">
+  <!-- Default Background Music: Bi Saraha (Abeer Nehme) -->
+  <audio id="bgMusic" autoplay loop preload="auto" playsinline webkit-playsinline>
     <source src="audio/bi_saraha.m4a" type="audio/mp4">
     <source src="audio/bi_saraha.mp3" type="audio/mpeg">
   </audio>
@@ -2247,13 +2247,13 @@ html_content = f'''<!DOCTYPE html>
     animateParticles();
 
     // ==========================================
-    // ==========================================
-    // BACKGROUND MUSIC SYSTEM: "BI SARAHA" (بصراحة)
+    // ==// ==========================================
+    // DEFAULT BACKGROUND MUSIC SYSTEM: "BI SARAHA" (بصراحة)
     // ==========================================
     const bgMusic = document.getElementById('bgMusic');
     const audioBtn = document.getElementById('audioBtn');
     const audioIcon = document.getElementById('audioIcon');
-    let isMusicPlaying = false;
+    let isMusicPlaying = true; // Enabled and playing by default
 
     function playBackgroundSong() {{
       if (!bgMusic) return;
@@ -2265,23 +2265,30 @@ html_content = f'''<!DOCTYPE html>
           if (audioIcon) audioIcon.innerText = '\U0001f50a';
           if (audioBtn) audioBtn.classList.add('music-active');
         }}).catch((err) => {{
-          console.log('Autoplay deferred until user interaction:', err);
-          const startOnGesture = () => {{
-            if (!isMusicPlaying && bgMusic) {{
-              bgMusic.play().then(() => {{
-                isMusicPlaying = true;
-                if (audioIcon) audioIcon.innerText = '\U0001f50a';
-                if (audioBtn) audioBtn.classList.add('music-active');
-              }}).catch(() => {{}});
-            }}
-            window.removeEventListener('click', startOnGesture);
-            window.removeEventListener('touchstart', startOnGesture);
-          }};
-          window.addEventListener('click', startOnGesture, {{ once: true }});
-          window.addEventListener('touchstart', startOnGesture, {{ once: true }});
+          console.log('Autoplay waiting for first touch/interaction:', err);
         }});
       }}
     }}
+
+    // 1. Immediately attempt default playback on load
+    playBackgroundSong();
+
+    // 2. Immediate gesture listener to guarantee default play on first screen touch/tap
+    const unlockDefaultAudio = () => {{
+      if (bgMusic) {{
+        bgMusic.volume = 0.70;
+        bgMusic.play().then(() => {{
+          isMusicPlaying = true;
+          if (audioIcon) audioIcon.innerText = '\U0001f50a';
+          if (audioBtn) audioBtn.classList.add('music-active');
+        }}).catch(() => {{}});
+      }}
+    }};
+
+    ['click', 'touchstart', 'touchend', 'pointerdown'].forEach((evt) => {{
+      document.addEventListener(evt, unlockDefaultAudio, {{ once: true, passive: true }});
+      window.addEventListener(evt, unlockDefaultAudio, {{ once: true, passive: true }});
+    }});
 
     function toggleBackgroundSong() {{
       if (!bgMusic) return;
