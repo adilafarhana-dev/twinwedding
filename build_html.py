@@ -2490,16 +2490,83 @@ html_content = f'''<!DOCTYPE html>
       document.getElementById('lightboxModal').classList.remove('open');
     }}
 
+    // ==========================================
+    // MOBILE TAP & GESTURE NAVIGATION
+    // (Tap right to advance, tap left to go back, swipe left/right supported)
+    // ==========================================
     let touchStartX = 0;
-    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchStartTime = 0;
+
     document.addEventListener('touchstart', (e) => {{
-      touchStartX = e.changedTouches[0].screenX;
-    }}, false);
+      if (e.touches.length > 0) {{
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = performance.now();
+      }}
+    }}, {{ passive: true }});
+
     document.addEventListener('touchend', (e) => {{
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchEndX < touchStartX - 50) nextStep();
-      if (touchEndX > touchStartX + 50) prevStep();
+      if (e.changedTouches.length === 0) return;
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const deltaX = endX - touchStartX;
+      const deltaY = endY - touchStartY;
+      const elapsedTime = performance.now() - touchStartTime;
+
+      // 1. Check for horizontal swipe gesture (> 45px movement)
+      if (Math.abs(deltaX) > 45 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2) {{
+        if (deltaX < 0) {{
+          nextStep(); // Swiped left -> Next page
+        }} else {{
+          prevStep(); // Swiped right -> Previous page
+        }}
+        return;
+      }}
+
+      // 2. Check for screen tap (< 18px movement within 380ms)
+      if (Math.abs(deltaX) < 18 && Math.abs(deltaY) < 18 && elapsedTime < 380) {{
+        // If tapping on interactive elements (buttons, links, map, controls), ignore screen tap
+        const interactiveTarget = e.target.closest('button, a, .icon-btn, .story-dash, iframe, input, select');
+        if (interactiveTarget) return;
+
+        // If on Scene 1 and envelope is not yet opened, tap opens envelope
+        if (currentStep === 1 && !envelopeOpened) {{
+          openInvitation();
+          return;
+        }}
+
+        // Tap left 30% of screen: Go to previous page
+        if (endX < window.innerWidth * 0.32) {{
+          prevStep();
+        }} else {{
+          // Tap main / right area (68% of screen): Move to next page!
+          nextStep();
+        }}
+      }}
     }}, false);
+
+    // Also support mouse click on stage for desktop preview
+    const stageWrapper = document.querySelector('.stage-wrapper');
+    if (stageWrapper) {{
+      stageWrapper.addEventListener('click', (e) => {{
+        // If clicking on interactive elements, let the button handle it
+        if (e.target.closest('button, a, .icon-btn, .story-dash, iframe, input, select, #waxSeal, .envelope-flaps-overlay')) {{
+          return;
+        }}
+        if (currentStep === 1 && !envelopeOpened) {{
+          openInvitation();
+          return;
+        }}
+        const rect = stageWrapper.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        if (clickX < rect.width * 0.32) {{
+          prevStep();
+        }} else {{
+          nextStep();
+        }}
+      }});
+    }}
 
     document.addEventListener('keydown', (e) => {{
       if (e.key === 'ArrowRight' || e.key === ' ') nextStep();
