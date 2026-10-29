@@ -1863,8 +1863,6 @@ html_content = f'''<!DOCTYPE html>
       if (envelopeOpened) return;
       envelopeOpened = true;
 
-      initAudio();
-      playChimeEffect();
       playBackgroundSong();
 
       envelopeBox.classList.add('opened');
@@ -2007,53 +2005,17 @@ html_content = f'''<!DOCTYPE html>
     animateParticles();
 
     // ==========================================
-    // AUDIO SYSTEM: BI SARAHA BACKGROUND MUSIC & CHIME
     // ==========================================
-    let audioCtx = null;
-    let isSynthPlaying = false;
-    let melodyTimer = null;
+    // BACKGROUND MUSIC SYSTEM: "BI SARAHA" (بصراحة)
+    // ==========================================
     const bgMusic = document.getElementById('bgMusic');
     const audioBtn = document.getElementById('audioBtn');
     const audioIcon = document.getElementById('audioIcon');
     let isMusicPlaying = false;
 
-    function initAudio() {{
-      if (!audioCtx) {{
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      }}
-      if (audioCtx.state === 'suspended') {{
-        audioCtx.resume();
-      }}
-    }}
-
-    function playChimeEffect() {{
-      try {{
-        initAudio();
-        const now = audioCtx.currentTime;
-        const freqs = [523.25, 659.25, 783.99, 1046.50, 1318.51];
-        freqs.forEach((freq, idx) => {{
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
-
-          gain.gain.setValueAtTime(0, now);
-          gain.gain.linearRampToValueAtTime(0.12, now + idx * 0.08 + 0.03);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + idx * 0.08 + 2.2);
-
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-
-          osc.start(now + idx * 0.08);
-          osc.stop(now + idx * 0.08 + 2.3);
-        }});
-      }} catch (e) {{}}
-    }}
-
     function playBackgroundSong() {{
       if (!bgMusic) return;
-      bgMusic.volume = 0.65;
+      bgMusic.volume = 0.70;
       const playPromise = bgMusic.play();
       if (playPromise !== undefined) {{
         playPromise.then(() => {{
@@ -2061,7 +2023,7 @@ html_content = f'''<!DOCTYPE html>
           if (audioIcon) audioIcon.innerText = '\U0001f50a';
           if (audioBtn) audioBtn.classList.add('music-active');
         }}).catch((err) => {{
-          console.log('Autoplay waiting for user gesture:', err);
+          console.log('Autoplay deferred until user interaction:', err);
           const startOnGesture = () => {{
             if (!isMusicPlaying && bgMusic) {{
               bgMusic.play().then(() => {{
@@ -2086,23 +2048,13 @@ html_content = f'''<!DOCTYPE html>
         isMusicPlaying = false;
         if (audioIcon) audioIcon.innerText = '\U0001f507';
         if (audioBtn) audioBtn.classList.remove('music-active');
-        if (melodyTimer) clearTimeout(melodyTimer);
-        isSynthPlaying = false;
       }} else {{
-        bgMusic.volume = 0.65;
+        bgMusic.volume = 0.70;
         bgMusic.play().then(() => {{
           isMusicPlaying = true;
           if (audioIcon) audioIcon.innerText = '\U0001f50a';
           if (audioBtn) audioBtn.classList.add('music-active');
-        }}).catch((e) => {{
-          console.warn('Playback fallback to soft synth:', e);
-          initAudio();
-          isSynthPlaying = true;
-          isMusicPlaying = true;
-          if (audioIcon) audioIcon.innerText = '\U0001f50a';
-          if (audioBtn) audioBtn.classList.add('music-active');
-          playNextMelodyNote();
-        }});
+        }}).catch((e) => console.warn('Audio play error:', e));
       }}
     }}
 
@@ -2111,37 +2063,6 @@ html_content = f'''<!DOCTYPE html>
         e.stopPropagation();
         toggleBackgroundSong();
       }});
-    }}
-
-    const weddingNotes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
-
-    function playNextMelodyNote() {{
-      if (!isSynthPlaying || !audioCtx) return;
-      const now = audioCtx.currentTime;
-      const noteFreq = weddingNotes[Math.floor(Math.random() * weddingNotes.length)];
-
-      const osc = audioCtx.createOscillator();
-      const gain = audioCtx.createGain();
-      const filter = audioCtx.createBiquadFilter();
-
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(noteFreq, now);
-
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(1200, now);
-
-      gain.gain.setValueAtTime(0, now);
-      gain.gain.linearRampToValueAtTime(0.07, now + 0.15);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
-
-      osc.connect(filter);
-      filter.connect(gain);
-      gain.connect(audioCtx.destination);
-
-      osc.start(now);
-      osc.stop(now + 2.5);
-
-      melodyTimer = setTimeout(playNextMelodyNote, Math.random() * 900 + 800);
     }}
 
     // ==========================================
