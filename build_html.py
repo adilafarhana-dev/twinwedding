@@ -1422,9 +1422,6 @@ html_content = f'''<!DOCTYPE html>
 
   <!-- Discreet Corner Controls -->
   <div class="corner-controls">
-    <button id="autoPlayBtn" class="icon-btn" title="Pause / Resume Automatic Slideshow">
-      <span id="autoPlayIcon">⏸</span>
-    </button>
     <button id="audioBtn" class="icon-btn" title="Bi Saraha by Abeer Nehme - Background Music">
       <span id="audioIcon">🎵</span>
     </button>
@@ -1834,23 +1831,25 @@ html_content = f'''<!DOCTYPE html>
     const autoPlayBtn = document.getElementById('autoPlayBtn');
     const autoPlayIcon = document.getElementById('autoPlayIcon');
 
-    autoPlayBtn.addEventListener('click', () => {{
-      autoPlayEnabled = !autoPlayEnabled;
-      if (autoPlayEnabled) {{
-        autoPlayIcon.innerText = '\u23f8';
-        const activeDash = document.querySelector('.story-dash.active');
-        if (activeDash) {{
-          const fill = activeDash.querySelector('.story-dash-fill');
-          startDashAnimation(activeDash, fill, currentStep);
+    if (autoPlayBtn) {{
+      autoPlayBtn.addEventListener('click', () => {{
+        autoPlayEnabled = !autoPlayEnabled;
+        if (autoPlayEnabled) {{
+          if (autoPlayIcon) autoPlayIcon.innerText = '\u23f8';
+          const activeDash = document.querySelector('.story-dash.active');
+          if (activeDash) {{
+            const fill = activeDash.querySelector('.story-dash-fill');
+            startDashAnimation(activeDash, fill, currentStep);
+          }}
+          showToast('Auto-play enabled');
+        }} else {{
+          if (autoPlayIcon) autoPlayIcon.innerText = '\u25b6';
+          if (storyProgressRaf) cancelAnimationFrame(storyProgressRaf);
+          storyPausedElapsed = performance.now() - storyStartTime;
+          showToast('Auto-play paused');
         }}
-        showToast('Auto-play enabled');
-      }} else {{
-        autoPlayIcon.innerText = '\u25b6';
-        if (storyProgressRaf) cancelAnimationFrame(storyProgressRaf);
-        storyPausedElapsed = performance.now() - storyStartTime;
-        showToast('Auto-play paused');
-      }}
-    }});
+      }});
+    }}
 
     // ==========================================
     // MAJESTIC SLOW 4-SIDE FLAP OPENING (3.8s)
