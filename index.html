@@ -1342,14 +1342,16 @@
     /* =========================================================
        STANDARDIZED MOBILE SCREEN VIEW (Full Screen Edge-to-Edge)
        ========================================================= */
-    @media (max-width: 600px) {
+    @media (max-width: 850px), (max-device-width: 850px), (hover: none) and (pointer: coarse) {
       html, body {
         width: 100vw;
         height: 100vh;
         height: 100dvh;
+        min-height: 100dvh;
         padding: 0;
         margin: 0;
         overflow: hidden;
+        background: #480C17;
       }
 
       .stage-wrapper {
@@ -1359,40 +1361,281 @@
         max-width: 100vw;
         max-height: 100dvh;
         margin: 0;
+        padding: 0;
         border-radius: 0;
+        box-shadow: none;
       }
 
       .invitation-card {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        max-width: 100vw;
+        max-height: 100dvh;
         border-radius: 0;
-        border-width: 4px;
-        outline-offset: -2px;
-        padding: 30px 16px 16px 16px;
+        border: 3px solid #5E1220;
+        outline: 1.5px solid #d4af37;
+        outline-offset: -3px;
+        box-shadow: none;
+        box-sizing: border-box;
+        padding: 28px 12px 10px 12px;
       }
 
       .story-header-bar {
-        top: 8px;
+        top: 10px;
         left: 10px;
-        right: 10px;
-        width: calc(100% - 20px);
+        right: 48px;
+        width: calc(100% - 58px);
       }
 
       .corner-controls {
-        top: 8px;
-        right: 10px;
+        top: 6px;
+        right: 8px;
+        z-index: 120;
       }
 
       .icon-btn {
-        width: 32px;
-        height: 32px;
+        width: 30px;
+        height: 30px;
+        font-size: 11px;
+      }
+
+      /* Universal Mobile Bottom Navigation Bar (Guaranteed visible, never cut off) */
+      .card-nav-row {
+        width: 100%;
+        padding-top: 4px;
+        padding-bottom: max(6px, env(safe-area-inset-bottom));
+        margin-top: auto;
+        flex-shrink: 0;
+        gap: 8px;
+      }
+
+      .nav-link-btn {
+        padding: 6px 14px;
+        font-size: 9px;
+        letter-spacing: 0.8px;
+      }
+
+      .gold-btn {
+        padding: 7px 16px;
+        font-size: 9px;
+        letter-spacing: 1px;
+      }
+
+      /* =========================================================
+         SCENE 1: ENVELOPE & CORDIALLY INVITED MOBILE FIT
+         ========================================================= */
+      #scene-invited {
+        padding: 26px 12px 10px 12px;
+      }
+      .invited-title {
+        font-size: 16px;
+        letter-spacing: 3px;
+      }
+      .bismillah-text {
+        font-size: 15px;
+      }
+      .invited-desc {
+        font-size: 11px;
+        line-height: 1.35;
+      }
+
+      /* =========================================================
+         SCENE 2: WE'RE GETTING MARRIED (TWIN COUPLES) MOBILE FIT
+         ========================================================= */
+      #scene-couples {
+        padding-top: 24px;
+        padding-bottom: 8px;
+      }
+      .title-banner {
+        font-size: 11px;
+        letter-spacing: 2.5px;
+        margin-top: 2px;
+        margin-bottom: 1px;
+      }
+      .subtitle-banner {
+        font-size: 12px;
+        margin-bottom: 4px;
+      }
+      .twins-badge {
+        font-size: 8.5px;
+        letter-spacing: 1px;
+        padding: 2px 10px;
+        margin-bottom: 6px;
+      }
+      .couples-stack {
+        gap: 5px;
+        margin: auto 0;
+        width: 100%;
+      }
+      .couple-card {
+        padding: 6px 8px;
+        border-radius: 8px;
+      }
+      .couple-role {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+        margin-bottom: 1px;
+      }
+      .bride-name {
+        font-size: 24px;
+        line-height: 1.05;
+      }
+      .ampersand {
+        font-size: 13px;
+        margin: 0;
+      }
+      .groom-name {
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        margin-top: 1px;
+      }
+      .couple-sub {
+        font-size: 10px;
+        margin-top: 1px;
+      }
+
+      /* =========================================================
+         SCENE 3: PORTRAIT ARTWORK MOBILE FIT
+         ========================================================= */
+      #scene-portrait {
+        padding: 26px 12px 10px 12px;
+      }
+      .portrait-parchment-frame {
+        max-height: calc(100dvh - 90px);
+      }
+
+      /* =========================================================
+         SCENE 4: CEREMONY DETAILS MOBILE FIT
+         ========================================================= */
+      #scene-details {
+        padding: 24px 12px 8px 12px;
+      }
+      .card-top-header {
+        font-size: 9.5px;
+        letter-spacing: 2px;
+        margin-bottom: 3px;
+      }
+      .parents-section {
+        margin-bottom: 3px;
+      }
+      .parents-names {
+        font-size: 13px;
+      }
+      .residence-line {
+        font-size: 10px;
+      }
+      .invite-text {
+        font-size: 10.5px;
+        margin-bottom: 4px;
+      }
+      .couples-detail-grid {
+        gap: 5px;
+        width: 100%;
+      }
+      .couple-detail-box {
+        padding: 5px 6px;
+      }
+      .c-union-tag {
+        font-size: 8px;
+        margin-bottom: 1px;
+      }
+      .c-bride {
+        font-size: 16px;
+        line-height: 1.05;
+      }
+      .c-with {
+        font-size: 9px;
+      }
+      .c-groom {
+        font-size: 11px;
+      }
+      .c-parentage {
+        font-size: 9px;
+        line-height: 1.15;
+      }
+      .quran-blessing {
+        font-size: 10px;
+        line-height: 1.25;
+        margin: 3px 0;
+        padding: 3px 6px;
+      }
+
+      /* =========================================================
+         SCENE 5: SCHEDULE & COUNTDOWN MOBILE FIT
+         ========================================================= */
+      #scene-schedule {
+        padding: 24px 12px 8px 12px;
+      }
+      .insha-allah-header {
+        font-size: 14px;
+        margin-bottom: 1px;
+      }
+      .insha-allah-sub {
+        font-size: 11px;
+        margin-bottom: 4px;
+      }
+      .event-info-cards {
+        gap: 4px;
+        margin-bottom: 5px;
+      }
+      .info-card {
+        padding: 5px 3px;
+      }
+      .info-card .icon {
         font-size: 12px;
       }
-
-      #scene-map {
-        padding: 28px 14px 14px 14px;
+      .info-card .label {
+        font-size: 7.5px;
+      }
+      .info-card .main-val {
+        font-size: 14px;
+      }
+      .info-card .sub-val {
+        font-size: 7.5px;
+        line-height: 1.1;
+      }
+      .countdown-wrap {
+        padding: 4px 6px;
+        margin: 3px 0;
+      }
+      .countdown-label {
+        font-size: 8.5px;
+        margin-bottom: 2px;
+      }
+      .timer-units {
+        gap: 6px;
+      }
+      .timer-unit .num {
+        font-size: 14px;
+      }
+      .timer-unit .unit {
+        font-size: 7.5px;
+      }
+      .compliments-note {
+        font-size: 9.5px;
+        margin-top: 3px;
+        line-height: 1.2;
       }
 
+      /* =========================================================
+         SCENE 6: VENUE & ROUTE MAP MOBILE FIT
+         ========================================================= */
+      #scene-map {
+        padding: 26px 12px 8px 12px;
+      }
+      .venue-title {
+        font-size: 12px;
+        letter-spacing: 2px;
+      }
+      .venue-sub {
+        font-size: 10.5px;
+        margin-bottom: 4px;
+      }
       .gmap-frame-box {
-        min-height: 260px;
+        flex: 1;
+        min-height: 180px;
+        margin-bottom: 6px;
       }
     }
   </style>
